@@ -94,7 +94,7 @@ class DuskCipher:
             f"{Colors.CYAN}║{Colors.END} {Colors.GRAY}Version: {Colors.GREEN}v{self.version}{Colors.GRAY} │Runs: {Colors.GREEN}{self.total_runs}{Colors.GRAY} │             Status: {Colors.GREEN}{self.status[:15]:<15}{Colors.CYAN}      ║{Colors.END}"
         )
         print(
-            f"{Colors.CYAN}║{Colors.END} {Colors.GRAY}Platform: {Colors.YELLOW}{self.platform[:30]:<30}{Colors.GRAY} │ Author: {Colors.YELLOW}{self.author}{Colors.GRAY}{' ' * (10-len(self.author))}{Colors.CYAN}      ║{Colors.END}"
+            f"{Colors.CYAN}║{Colors.END} {Colors.GRAY}Platform: {Colors.YELLOW}{self.platform[:30]:<30}{Colors.GRAY} │ Author: {Colors.YELLOW}{self.author}{Colors.GRAY}{' ' * (10-len(self.author))}{Colors.CYAN}       ║{Colors.END}"
         )
 
         print(f"{Colors.CYAN}{'╚' + '═' * 68 + '╝'}{Colors.END}")
