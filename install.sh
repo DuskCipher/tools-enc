@@ -29,6 +29,7 @@ print_error() {
 }
 
 print_header() {
+    clear
     echo -e "${MAGENTA}╔══════════════════════════════════════════════════════════════╗${NC}"
     echo -e "${MAGENTA}║${CYAN}                    DUSK CIPHER INSTALLER                    ${MAGENTA} ║${NC}"
     echo -e "${MAGENTA}║${YELLOW}              Professional Encryption Toolkit              ${MAGENTA}   ║${NC}"
