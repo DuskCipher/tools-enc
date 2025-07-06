@@ -122,7 +122,7 @@ class DuskCipher:
                       ("[5] 🔄 Batch Operations", "Process multiple files"),
                       ("[6] 🛡️  Security Scanner", " Security analysis"),
                       ("[7] 📊 Usage Statistics", "View usage logs"),
-                      ("[8] ⚙️  System Tools v01", "  Advanced utilities"),
+                      ("[8] 🔄 Update Script", "Update from GitHub"),
                       ("[9] 🌐 Web Interface", "Launch web UI"),
                       ("[0] 🚪 Exit", "Close application")]
 
@@ -692,9 +692,9 @@ def main():
     print("Hello, World!")
     print("This is a basic Python script created with DUSK CIPHER.")
     print(f"Script name: {script_name}")
-    
+
     # Your code here
-    
+
 
 if __name__ == "__main__":
     main()''',
@@ -727,15 +727,15 @@ def main():
     print(f"{{script_name.upper()}} - Interactive Python Script")
     print("Created with DUSK CIPHER")
     print("=" * 60)
-    
+
     name = get_user_input()
     print(f"\\nHello, {{name}}! Welcome to {script_name}!")
-    
+
     print(f"\\nSystem Information:")
     print(f"• Current time: {{datetime.now()}}")
     print(f"• Python version: {{sys.version_info.major}}.{{sys.version_info.minor}}")
     print(f"• Platform: {{os.name}}")
-    
+
     print("\\n✅ Script completed successfully!")
 
 if __name__ == "__main__":
@@ -753,7 +753,7 @@ import sys
 
 class CustomHandler(SimpleHTTPRequestHandler):
     """Custom HTTP request handler"""
-    
+
     def log_message(self, format, *args):
         """Override default logging"""
         print(f"[{{self.log_date_time_string()}}] {{format % args}}")
@@ -763,7 +763,7 @@ def run_server(port=8000):
     try:
         server_address = ('0.0.0.0', port)
         httpd = HTTPServer(server_address, CustomHandler)
-        
+
         print("=" * 50)
         print(f"{{script_name.upper()}} - Web Server")
         print("Created with DUSK CIPHER")
@@ -772,9 +772,9 @@ def run_server(port=8000):
         print(f"📁 Serving directory: {{os.getcwd()}}")
         print("⏹️  Press Ctrl+C to stop server")
         print("-" * 50)
-        
+
         httpd.serve_forever()
-        
+
     except KeyboardInterrupt:
         print("\\n⏹️  Server stopped by user")
         httpd.shutdown()
@@ -789,7 +789,7 @@ if __name__ == "__main__":
         except ValueError:
             print("❌ Invalid port number")
             sys.exit(1)
-    
+
     run_server(port)'''
         }
 
@@ -1082,6 +1082,188 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"\n{Colors.RED}❌ Gagal memuat statistik: {e}{Colors.END}")
 
+    def launch_web_interface(self):
+        """Launch web interface"""
+        print(f"\n{Colors.CYAN}🌐 WEB INTERFACE{Colors.END}")
+        print(f"{Colors.MAGENTA}{'╔' + '═' * 48 + '╗'}{Colors.END}")
+        print(
+            f"{Colors.MAGENTA}║{Colors.YELLOW}{'  LAUNCHING WEB INTERFACE  ':^48}{Colors.MAGENTA}║{Colors.END}"
+        )
+        print(f"{Colors.MAGENTA}{'╚' + '═' * 48 + '╝'}{Colors.END}")
+
+        try:
+            print(f"{Colors.YELLOW}🚀 Starting web server...{Colors.END}")
+            print(f"{Colors.CYAN}🌐 Web interface will be available at: http://0.0.0.0:5000{Colors.END}")
+            print(f"{Colors.YELLOW}⚠️  Press Ctrl+C to stop the server{Colors.END}")
+
+            # Launch web interface
+            os.system("python3 web_obfuscator.py")
+
+        except KeyboardInterrupt:
+            print(f"\n{Colors.YELLOW}⏹️  Web server stopped{Colors.END}")
+        except Exception as e:
+            print(f"{Colors.RED}❌ Error launching web interface: {e}{Colors.END}")
+
+    def update_script(self):
+        os.system('clear')
+        """Update script from GitHub repository"""
+        print(f"\n{Colors.CYAN}🔄 SCRIPT UPDATE{Colors.END}")
+        print(f"{Colors.MAGENTA}{'╔' + '═' * 48 + '╗'}{Colors.END}")
+        print(
+            f"{Colors.MAGENTA}║{Colors.YELLOW}{'  UPDATING FROM GITHUB  ':^48}{Colors.MAGENTA}║{Colors.END}"
+        )
+        print(f"{Colors.MAGENTA}{'╚' + '═' * 48 + '╝'}{Colors.END}")
+
+        github_repo = "https://github.com/DuskCipher/tools-enc.git"
+
+        print(f"{Colors.YELLOW}📡 Repository: {github_repo}{Colors.END}")
+        print(f"{Colors.YELLOW}📁 Current Directory: {os.getcwd()}{Colors.END}")
+
+        # Check if git is available
+        try:
+            os.system("git --version > /dev/null 2>&1")
+        except:
+            print(f"{Colors.RED}❌ Git tidak tersedia. Mencoba download manual...{Colors.END}")
+            self.manual_update()
+            return
+
+        # Ask for confirmation
+        confirm = input(f"\n{Colors.YELLOW}⚠️  Update akan menimpa file yang ada. Lanjutkan? (y/n): {Colors.END}").strip().lower()
+
+        if confirm != 'y':
+            print(f"{Colors.YELLOW}🔄 Update dibatalkan{Colors.END}")
+            return
+
+        print(f"\n{Colors.CYAN}🔄 Memulai update...{Colors.END}")
+
+        # Create backup of current files
+        backup_dir = f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        try:
+            os.makedirs(backup_dir, exist_ok=True)
+
+            # Backup important files
+            important_files = ["dusk_cipher.py", "web_obfuscator.py", "pyobfuscator.py", "pydecoder.py", "file_creator.py"]
+            for file in important_files:
+                if os.path.exists(file):
+                    os.system(f"cp {file} {backup_dir}/")
+
+            print(f"{Colors.GREEN}✅ Backup dibuat di: {backup_dir}{Colors.END}")
+        except Exception as e:
+            print(f"{Colors.YELLOW}⚠️  Gagal membuat backup: {e}{Colors.END}")
+
+        # Try to update using git
+        try:
+            if os.path.exists(".git"):
+                # If already a git repo, pull updates
+                print(f"{Colors.CYAN}🔄 Pulling updates...{Colors.END}")
+                result = os.system("git pull origin main")
+                if result == 0:
+                    print(f"{Colors.GREEN}✅ Update berhasil!{Colors.END}")
+                else:
+                    print(f"{Colors.YELLOW}⚠️  Git pull gagal, mencoba clone...{Colors.END}")
+                    self.clone_repository(github_repo)
+            else:
+                # Clone repository
+                self.clone_repository(github_repo)
+
+        except Exception as e:
+            print(f"{Colors.RED}❌ Error during update: {e}{Colors.END}")
+            print(f"{Colors.YELLOW}🔄 Mencoba download manual...{Colors.END}")
+            self.manual_update()
+
+    def clone_repository(self, repo_url):
+        """Clone repository and copy files"""
+        temp_dir = "temp_update"
+        try:
+            # Remove temp directory if exists
+            if os.path.exists(temp_dir):
+                os.system(f"rm -rf {temp_dir}")
+
+            print(f"{Colors.CYAN}📥 Cloning repository...{Colors.END}")
+            result = os.system(f"git clone {repo_url} {temp_dir}")
+
+            if result == 0:
+                # Copy files from temp directory
+                print(f"{Colors.CYAN}📋 Copying files...{Colors.END}")
+                os.system(f"cp -r {temp_dir}/* .")
+
+                # Clean up
+                os.system(f"rm -rf {temp_dir}")
+
+                # Make scripts executable
+                os.system("chmod +x *.py *.sh")
+
+                print(f"{Colors.GREEN}✅ Update berhasil!{Colors.END}")
+                print(f"{Colors.YELLOW}🔄 Restart aplikasi untuk melihat perubahan{Colors.END}")
+
+            else:
+                print(f"{Colors.RED}❌ Clone gagal{Colors.END}")
+                self.manual_update()
+
+        except Exception as e:
+            print(f"{Colors.RED}❌ Error cloning repository: {e}{Colors.END}")
+            self.manual_update()
+
+    def manual_update(self):
+        """Manual update using wget/curl"""
+        print(f"\n{Colors.CYAN}📥 MANUAL UPDATE{Colors.END}")
+
+        base_url = "https://raw.githubusercontent.com/DuskCipher/tools-enc/main"
+        files_to_update = [
+            "dusk_cipher.py",
+            "web_obfuscator.py", 
+            "pyobfuscator.py",
+            "pydecoder.py",
+            "file_creator.py",
+            "install.sh",
+            "README.md"
+        ]
+
+        updated_files = []
+        failed_files = []
+
+        for file in files_to_update:
+            try:
+                print(f"{Colors.YELLOW}📥 Downloading {file}...{Colors.END}")
+
+                # Try wget first, then curl
+                url = f"{base_url}/{file}"
+                result = os.system(f"wget -q -O {file} {url}")
+
+                if result != 0:
+                    result = os.system(f"curl -s -o {file} {url}")
+
+                if result == 0:
+                    updated_files.append(file)
+                    print(f"{Colors.GREEN}✅ {file} updated{Colors.END}")
+                else:
+                    failed_files.append(file)
+                    print(f"{Colors.RED}❌ Failed to download {file}{Colors.END}")
+
+            except Exception as e:
+                failed_files.append(file)
+                print(f"{Colors.RED}❌ Error downloading {file}: {e}{Colors.END}")
+
+        print(f"\n{Colors.CYAN}📊 UPDATE SUMMARY{Colors.END}")
+        print(f"{Colors.GREEN}✅ Updated: {len(updated_files)} files{Colors.END}")
+        if updated_files:
+            for file in updated_files:
+                print(f"  • {file}")
+
+        if failed_files:
+            print(f"{Colors.RED}❌ Failed: {len(failed_files)} files{Colors.END}")
+            for file in failed_files:
+                print(f"  • {file}")
+
+        if updated_files:
+            # Make scripts executable
+            os.system("chmod +x *.py *.sh")
+            print(f"\n{Colors.GREEN}✅ Manual update completed!{Colors.END}")
+            print(f"{Colors.YELLOW}🔄 Restart aplikasi untuk melihat perubahan{Colors.END}")
+        else:
+            print(f"\n{Colors.RED}❌ No files were updated{Colors.END}")
+            print(f"{Colors.YELLOW}💡 Check your internet connection and try again{Colors.END}")
+
     def run_interactive_mode(self):
         """Run the interactive mode"""
         os.system('clear' if os.name == 'posix' else 'cls')
@@ -1115,9 +1297,7 @@ if __name__ == "__main__":
             elif choice == "7":
                 self.handle_usage_logs()
             elif choice == "8":
-                print(
-                    f"\n{Colors.YELLOW}⚙️ System tools - Feature coming soon!{Colors.END}"
-                )
+                self.update_script()
             elif choice == "9":
                 self.handle_web_interface()
             else:
